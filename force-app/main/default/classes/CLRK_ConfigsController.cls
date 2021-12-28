@@ -1,6 +1,8 @@
 public with sharing class CLRK_ConfigsController {
-    public static final String ENDPOINT = 'https://case-configs.requestcatcher.com/';
     
+    public static final String ENDPOINT = 'https://case-configs.requestcatcher.com/';
+
+    //Method to get all available configs which will filter out cofigs in case object
     @AuraEnabled(Cacheable=true)
     public static list<Config__c> getAllConfigs(){
         try {
@@ -19,6 +21,8 @@ public with sharing class CLRK_ConfigsController {
         }
         
     }
+
+    //Method to get All Case Configs
     @AuraEnabled(Cacheable=true)
     public static list<Case_Config__c> getAllCaseConfigs(String caseId){
         try {
@@ -31,6 +35,8 @@ public with sharing class CLRK_ConfigsController {
         }
         
     }
+
+    //Method to add new configs to case
     @AuraEnabled
     public static void addConfigsToCase(List<Config__c> configsLst,Id caseId){
         try {
@@ -50,6 +56,8 @@ public with sharing class CLRK_ConfigsController {
             throw new AuraHandledException(e.getMessage());
         }
     }
+
+    //Method to handle the case send - Updating the case status with closed and making a call external system with case cofigs data
     @AuraEnabled
     public static void handleCaseSend(List<Case_Config__c> caseConfigsLst,String caseId){
         try {
@@ -92,6 +100,8 @@ public with sharing class CLRK_ConfigsController {
             throw new AuraHandledException(e.getMessage());
         }
     }
+
+    //Common method to make http callout
     @future(callout=true)
     public static void sendDataToExternalSystem(String requestBody){
 
