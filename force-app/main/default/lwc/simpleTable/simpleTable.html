@@ -1,0 +1,87 @@
+<template>           
+<div class="tableFixHead">
+    <div class="slds-scrollable_y" style="height:50%;">
+    <table class="slds-table--header-fixed slds-table_cell-buffer slds-table slds-table_cell-buffer slds-table_bordered">
+        <thead>
+            <tr class="slds-text-title--caps">
+                
+                <th data-id="checkbox" class="" scope="col">
+                    <div if:true={hascheckboxselect}>
+                        <div class="slds-truncate">
+                            <lightning-input onchange={allSelected} data-id="selectAll" disabled={selectAllDisabled} type="checkbox"></lightning-input>
+                        </div>
+                    </div>
+                </th>
+                
+                <th data-id="Label__c" onclick={sortLabel} class="" scope="col"> 
+                    <a href="javascript:void(0);" class="slds-th__action slds-text-link--reset">
+                        <span class="slds-assistive-text">Sort</span>
+                        <span class="slds-truncate" title="Label">Label</span>
+                        <div if:true={isLabelSort}>
+                            <div if:true={isAsc}>
+                                &#9650;
+                            </div>
+                            <div if:true={isDsc}>
+                                &#9660;
+                            </div>
+                        </div>
+                    </a>
+                </th>
+                <th data-id="Type__c" onclick={sortType} class="" scope="col">
+                    <a href="javascript:void(0);" class="slds-th__action slds-text-link--reset">
+                        <span class="slds-assistive-text">Sort</span>
+                        <span class="slds-truncate" title="Type">Type</span>
+                        <div if:true={isTypeSort}>
+                            <div if:true={isAsc}>
+                                &#9650;
+                            </div>
+                            <div if:true={isDsc}>
+                                &#9660;
+                            </div>
+                        </div>
+                    </a>
+                </th>
+                <th data-id="Amount__c " onclick={sortAmount} class="" scope="col">
+                    <a href="javascript:void(0);" class="slds-th__action slds-text-link--reset">
+                        <span class="slds-assistive-text">Sort</span>
+                        <span class="slds-truncate" title="Amount">Amount</span>
+                        <div if:true={isAmountSort}>
+                            <div if:true={isAsc}>
+                                &#9650;
+                            </div>
+                            <div if:true={isDsc}>
+                                &#9660;
+                            </div>
+                        </div>
+                    </a>
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={recordlst} for:item="item">                    
+                    <tr key={item.Id}>                                                 
+                        <td>
+                            <div if:true={hascheckboxselect}>   
+                                <lightning-input type="checkbox" value={item.Label__c} data-id={item.Id} data-type={item.Type__c}
+                                data-amount={item.Amount__c}></lightning-input>
+                            </div>   
+                        </td>                                                         
+                        <td>
+                            {item.Label__c}
+                        </td>
+                        <td>
+                            {item.Type__c}
+                        </td>
+                        <td>
+                            {item.Amount__c }
+                        </td>
+                    </tr>
+                
+            </template>
+        </tbody>
+    </table>
+    </div>
+</div>
+<br></br>
+</template>

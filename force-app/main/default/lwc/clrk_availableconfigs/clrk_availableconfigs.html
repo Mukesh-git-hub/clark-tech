@@ -1,0 +1,10 @@
+<template>
+    <lightning-card title={labelName} icon-name="standard:bundle_config" class="slds-card_boundary">
+        <c-simple-table recordlst={allConfigsLst} hascheckboxselect={showCheckBoxColumn}></c-simple-table>
+        <div class="slds-col">
+            <span>
+                <lightning-button label="Add" onclick={addSelectedItems} disabled={addDisabled} style="margin-left: 80%" variant="brand"></lightning-button>
+            </span>
+        </div>
+    </lightning-card>
+</template>

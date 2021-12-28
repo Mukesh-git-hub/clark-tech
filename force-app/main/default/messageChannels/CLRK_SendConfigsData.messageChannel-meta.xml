@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>SendConfigsData</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Lightning Message Channel to send Configs Data</description>
+    <lightningMessageFields>
+        <fieldName>recordId</fieldName>
+        <description>This is the record Id</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>recordsData</fieldName>
+        <description>The current data</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>source</fieldName>
+        <description>This is the source object</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>sendData</fieldName>
+        <description>This is boolean falg send data to external system</description>
+    </lightningMessageFields>
+</LightningMessageChannel>
