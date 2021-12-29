@@ -98,6 +98,7 @@ export default class Clrk_caseconfigs extends LightningElement {
 	}
 	sendSelectedItems(){
 
+		if(this.allCaseConfigsLst.length > 0){
 		this.addDisabled = true;
 		const message = {
             recordId: this.recordId,
@@ -116,6 +117,10 @@ export default class Clrk_caseconfigs extends LightningElement {
 				this.showToast('Failure','Error while sending the case configs','error');
 				this.error = error;				
 			});
+		}
+		else{
+			this.showToast('Error','Add atleast one config to send','error');
+		}
 
 	}
 	showToast(title,message,variant) {
