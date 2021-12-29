@@ -4,6 +4,7 @@ import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import ISCLOSED_FIELD from '@salesforce/schema/Case.IsClosed';
 import { publish, MessageContext , subscribe, unsubscribe, APPLICATION_SCOPE, } from 'lightning/messageService';
 import CONFIGDATASERVICE from '@salesforce/messageChannel/CLRK_SendConfigsData__c';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 const fields = [ISCLOSED_FIELD];
 
@@ -44,20 +45,25 @@ export default class Clrk_availableconfigs extends LightningElement {
         this.handleSubscribe();
     }
     addSelectedItems(){
-        console.log('the parent');
+
         const objChild = this.template.querySelector('c-simple-table');
         var selectedLst = objChild.selectedItems();
-        console.log('the final list'+JSON.stringify(selectedLst));
-        
-        const message = {
-            recordId: this.recordId,
-            recordData: selectedLst,
-            source: "availableConfigs",
-            sendData: false     
-        };
-        publish(this.messageContext, CONFIGDATASERVICE, message);
-        selectedLst = [];
-        console.log('the message has been published');        
+        console.log('selectedLst.length '+selectedLst.length );
+        if(selectedLst.length > 0){
+            console.log('the final list'+JSON.stringify(selectedLst));
+            
+            const message = {
+                recordId: this.recordId,
+                recordData: selectedLst,
+                source: "availableConfigs",
+                sendData: false     
+            };
+            publish(this.messageContext, CONFIGDATASERVICE, message);
+            selectedLst = [];    
+        }
+        else{
+            this.showToast('Error','Select atleast one config to add','error');
+        } 
     }
     handleSubscribe() {
 		if (this.subscription) {
@@ -74,6 +80,15 @@ export default class Clrk_availableconfigs extends LightningElement {
 			}
             console.log('got message');
 		});
+	}
+    showToast(title,message,variant) {
+		const event = new ShowToastEvent({
+			title: title,
+			message: message,
+			variant: variant,
+			mode: 'dismissable'
+		});
+		this.dispatchEvent(event);
 	}
 
 }
