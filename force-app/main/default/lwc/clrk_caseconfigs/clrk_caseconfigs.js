@@ -31,7 +31,6 @@ export default class Clrk_caseconfigs extends LightningElement {
 			this.addDisabled  = data.fields[ ISCLOSED_FIELD.fieldApiName ].value;							
 		}
 		  else if( error ){
-			console.error( "error: ", error );
 		  }	  
 	}
     connectedCallback() {
@@ -64,7 +63,6 @@ export default class Clrk_caseconfigs extends LightningElement {
 			this.receivedMessage = message;			
 			if(this.receivedMessage.source === 'availableConfigs' && this.receivedMessage.recordId === this.recordId &&  this.receivedMessage.recordData.length > 0){
 				tempList = this.receivedMessage.recordData;
-				console.log('tempList is--->'+JSON.stringify(tempList));
 			}
 			if(tempList.length > 0){
 			
@@ -107,7 +105,6 @@ export default class Clrk_caseconfigs extends LightningElement {
 			sendData: true    
         };
         publish(this.messageContext, CONFIGDATASERVICE, message);
-		console.log('i sent the message');
 
 		sendCaseConfigs({caseConfigsLst: this.allCaseConfigsLst,caseId: this.recordId})
 			.then(result => {

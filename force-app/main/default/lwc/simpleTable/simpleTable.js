@@ -76,7 +76,6 @@ export default class simpleTable extends LightningElement {
         let isReverse = this.sortedDirection === 'asc' ? 1 : -1;
 
         this.sortedColumn = sortColumnName;
-        console.log('sortColumnName--->'+sortColumnName);
         // sort the data
         this.recordlst = JSON.parse(JSON.stringify(this.recordlst)).sort((a, b) => {
             if(sortColumnName == 'Amount__c '){
@@ -108,7 +107,6 @@ export default class simpleTable extends LightningElement {
                 })
             }
         }
-        console.log('selectedRecords--->'+JSON.stringify(this.selectedRecords));
         return this.selectedRecords;    
     }
 }

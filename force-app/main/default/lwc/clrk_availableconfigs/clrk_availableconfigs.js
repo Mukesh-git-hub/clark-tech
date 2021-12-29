@@ -27,7 +27,6 @@ export default class Clrk_availableconfigs extends LightningElement {
 			this.addDisabled  = data.fields[ ISCLOSED_FIELD.fieldApiName ].value;
 		}
 		  else if( error ){
-			console.error( "error: ", error );
 		  }
 	  
 	}
@@ -48,9 +47,7 @@ export default class Clrk_availableconfigs extends LightningElement {
 
         const objChild = this.template.querySelector('c-simple-table');
         var selectedLst = objChild.selectedItems();
-        console.log('selectedLst.length '+selectedLst.length );
         if(selectedLst.length > 0){
-            console.log('the final list'+JSON.stringify(selectedLst));
             
             const message = {
                 recordId: this.recordId,
@@ -70,7 +67,6 @@ export default class Clrk_availableconfigs extends LightningElement {
 			return;
 		}
 		this.subscription = subscribe(this.messageContext, CONFIGDATASERVICE, (message) => {
-			console.log('getting message');
 			this.receivedMessage = message;
 			if(this.receivedMessage.source === 'caseConfigs' && 
 				this.receivedMessage.recordId === this.recordId &&
@@ -78,7 +74,6 @@ export default class Clrk_availableconfigs extends LightningElement {
 				
 				this.addDisabled = true;
 			}
-            console.log('got message');
 		});
 	}
     showToast(title,message,variant) {
